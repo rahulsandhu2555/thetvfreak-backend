@@ -1,5 +1,6 @@
 const express = require("express");
 const {connection} = require("./dbConfig");
+const db = require("./db");
 
 const app = express();
 const port = 3000;
@@ -14,16 +15,10 @@ app.get("/", (req, res) => {
     res.json({ message: "ok" });
 });
 app.get("/posts", (req, res) => {
-    let response;
-    connection.query(
-        'SELECT * FROM `posts`',
-        function(err, results, fields) {
-            response = results
-            console.log(results); // results contains rows returned by server
-            console.log(fields); // fields contains extra meta data about results, if available
-        }
+    const rows =  db.query(
+        'SELECT * FROM `posts`'
     );
-    res.json({ message: "ok", post: response });
+    res.json({ message: "ok", post: rows });
 });
 
 app.listen(port, () => {

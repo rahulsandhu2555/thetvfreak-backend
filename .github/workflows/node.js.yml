@@ -30,4 +30,5 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './backend/package-lock.json'
       - run: npm ci
-      - run: pm2 restart backend
+      - run: pm2 restart /home/ubuntu/_work/thetvfreak-backend/thetvfreak-backend/index.js
+

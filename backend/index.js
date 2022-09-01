@@ -14,8 +14,8 @@ app.use(
 app.get("/", (req, res) => {
     res.json({ message: "ok" });
 });
-app.get("/posts", (req, res) => {
-    const rows =  db.query(
+app.get("/posts", async (req, res) => {
+    const rows = await db.query(
         'SELECT * FROM `posts`'
     );
     res.json({ message: "ok", post: rows });

@@ -15,8 +15,9 @@ app.get("/", (req, res) => {
     res.json({ message: "ok" });
 });
 app.get("/posts", async (req, res) => {
+    let rows;
     try{
-        const rows = await db.query(
+        rows = await db.query(
             'SELECT * FROM `posts`'
         );
     }

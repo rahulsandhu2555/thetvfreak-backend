@@ -1,4 +1,4 @@
-const config = {
+const dbConfig = {
     db: {
         host: 'localhost',
         user: 'ttf',
@@ -7,4 +7,4 @@ const config = {
     },
     listPerPage: 10,
 };
-module.exports = config;
+module.exports = dbConfig;

@@ -1,32 +1,22 @@
 const express = require("express");
-const {connection} = require("./dbConfig");
-const db = require("./db");
+const cors = require("cors");
 
 const app = express();
+
+let corsOptions = {
+    origin: "http://localhost:3000",
+
+};
+app.use(cors());
+
 const port = 3000;
 app.use(express.json());
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
+app.use(express.urlencoded({
+    extended: true,
+}));
 
-app.get("/", (req, res) => {
-    res.json({ message: "ok" });
-});
-app.get("/posts", async (req, res) => {
-    let rows;
-    try{
-        rows = await db.query(
-            'SELECT * FROM `posts`'
-        );
-    }
-    catch (e) {
-        res.json({ message: "ok", post: e.message });
-    }
-    res.json({ message: "ok", post: rows });
-});
+require("../backend/posts.routes.js")(app);
 
 app.listen(port, () => {
-    console.log(`Example app listeningg at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });

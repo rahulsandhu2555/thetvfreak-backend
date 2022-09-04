@@ -24,9 +24,6 @@ module.exports = app => {
     // Delete all Posts
     router.delete("/", posts.deleteAll);
 
-    // Retrieve all Posts
-    // router.get("/", posts.findAll);
-
     // Retrieve all published Posts
     router.get("/published", posts.findAllPublished);
     app.use('/blog', router);

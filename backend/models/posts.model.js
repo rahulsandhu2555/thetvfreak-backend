@@ -52,11 +52,10 @@ Post.findBySlug = (slug, result) => {
     result({ kind: "not_found" }, null);
   });
 };
-Post.getAll = (title, result) => {
+Post.getAll = (result) => {
   let query = "SELECT * FROM posts";
-  if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
-  }
+
+    // query += ` WHERE title LIKE '%${title}%'`;
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);

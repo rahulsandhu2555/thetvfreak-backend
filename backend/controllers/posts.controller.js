@@ -179,7 +179,7 @@ exports.deleteAll = (req, res) => {
 exports.findAllPosts = (req, res) => {
     console.log('inside url')
     const title = req.query.title;
-    Post.getAll(title, (err, data) => {
+    Post.getAll((err, data) => {
         if (err)
             res.status(500).send({
                 message:

@@ -4,6 +4,7 @@ module.exports = app => {
     router.get("/posts", posts.findAllPosts);
 
     // Create a new Posts
+
     router.post("/", posts.create);
 
     // Retrieve a single Posts with id

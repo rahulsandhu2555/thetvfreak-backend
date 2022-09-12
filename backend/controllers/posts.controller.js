@@ -1,4 +1,5 @@
 const Post = require("../models/posts.model");
+const PostMeta = require("../models/postmeta.model");
 
 // Create and Save a new Post
 exports.create = (req, res) => {
@@ -20,6 +21,23 @@ exports.create = (req, res) => {
     });
     // Save Post in the database
     Post.create(post, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Post."
+            });
+        else res.send(data);
+    });
+};
+exports.createPostMeta = (req, res) => {
+    // Create a Post
+    const post = new PostMeta({
+        post_id: req.body.post_id,
+        meta_key: '_thumbnail_id',
+        meta_value: req.body.meta_value
+    });
+    // Save Post in the database
+    PostMeta.createPostMeta(post, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -177,9 +195,8 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.findAllPosts = (req, res) => {
-    console.log('inside url')
-    const title = req.query.title;
-    Post.getAll((err, data) => {
+    let pageNumber =req.query.page
+    Post.getAll(pageNumber, (err, data) => {
         if (err)
             res.status(500).send({
                 message:

@@ -5,6 +5,6 @@ const dbConfig = {
         password: 'Password@123',
         database: 'ttf'
     },
-    listPerPage: 10,
+    listPerPage: 12,
 };
 module.exports = dbConfig;

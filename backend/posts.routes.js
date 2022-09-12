@@ -6,6 +6,7 @@ module.exports = app => {
     // Create a new Posts
 
     router.post("/", posts.create);
+    router.post("/postmeta", posts.createPostMeta);
 
     // Retrieve a single Posts with id
     router.get("/id/:id", posts.findById);

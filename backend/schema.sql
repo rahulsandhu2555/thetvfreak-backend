@@ -321,3 +321,21 @@ COMMIT;
 
 
 -- -----------------
+--post_type:
+  --attachment
+  --custom_css
+  --elementor_library
+  --elementor-hf
+  --nav_menu_item
+  --oembed_cache
+  --page
+  --post
+  --revision
+  --soliloquy
+
+
+post_status
+    --auto-draft
+    --draft
+    --inherit
+    --publish

@@ -205,3 +205,14 @@ exports.findAllPosts = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.findTotalNumberOfPosts = (req, res) => {
+    Post.findTotalNumberOfPosts((err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving posts."
+            });
+        else res.send(data);
+    });
+};

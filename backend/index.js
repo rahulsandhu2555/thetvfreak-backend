@@ -9,7 +9,7 @@ let corsOptions = {
 };
 app.use(cors());
 
-const port = 3000;
+const port = 3002;
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true,

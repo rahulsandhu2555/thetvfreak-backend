@@ -84,6 +84,17 @@ Post.getAllPublished = result => {
         result(null, res);
     });
 };
+Post.findTotalNumberOfPosts = result => {
+    sql.query("SELECT count(*) as total FROM posts", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("posts: ", res[0]);
+        result(null, res[0]);
+    });
+};
 
 Post.updateById = (id, post, result) => {
     sql.query("UPDATE posts SET post_content = ?, post_title = ?, post_name = ?, post_excerpt = ?, post_content_filtered = ? WHERE id = ?", [post.post_content, post.post_title, post.post_name, post.post_excerpt, post.post_content_filtered, id], (err, res) => {

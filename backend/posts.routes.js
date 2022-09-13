@@ -2,6 +2,7 @@ module.exports = app => {
     const posts = require("../backend/controllers/posts.controller");
     let router = require("express").Router();
     router.get("/posts", posts.findAllPosts);
+    router.get("/total-number-of-posts", posts.findTotalNumberOfPosts);
 
     // Create a new Posts
 

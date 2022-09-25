@@ -8,6 +8,7 @@ let corsOptions = {
 
 };
 app.use(cors());
+app.use(express.json())
 
 const port = 3002;
 app.use(express.json());

@@ -6,12 +6,7 @@ module.exports = app => {
     router.post("/fetch-posts", posts.fetchPosts);
     router.get("/fetch-posts-stats", posts.fetchPostsStats);
 
-    router.get("/posts", posts.findAllPosts);
-    router.get("/total-number-of-posts", posts.findTotalNumberOfPosts);
-    router.get("/get-all-categories", posts.getAllCategories);
     router.get("/list-of-posts", posts.findListOfPostUrls);
-    router.get("/list-of-category-posts/:category", posts.getAllCategoryPosts);
-    router.get("/number-of-category-posts/:category", posts.getNumberOfCategoryPosts);
 
     // Create a new Posts
 

@@ -319,6 +319,7 @@ ALTER TABLE `term_taxonomy`
   MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3166;
 COMMIT;
 
+--role_permissions
 
 -- -----------------
 --post_type:

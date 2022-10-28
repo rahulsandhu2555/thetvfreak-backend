@@ -2,7 +2,6 @@ const Post = require("../models/posts.model");
 const PostMeta = require("../models/postmeta.model");
 const dbConfig = require("../dbConfig");
 
-// Create and Save a new Post
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -194,18 +193,7 @@ exports.deleteAll = (req, res) => {
         else res.send({ message: `All posts were deleted successfully!` });
     });
 };
-
-exports.findAllPosts = (req, res) => {
-    let pageNumber =req.query.page
-    Post.getAll(pageNumber, (err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving posts."
-            });
-        else res.send(data);
-    });
-};
+//======================================================================================
 
 exports.fetchPosts = (req, res) => {
     const request = req.body;
@@ -221,57 +209,6 @@ exports.fetchPosts = (req, res) => {
     });
 };
 
-exports.findTotalNumberOfPosts = (req, res) => {
-    Post.findTotalNumberOfPosts((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving posts."
-            });
-        else res.send(data);
-    });
-};
-
-exports.getAllCategories = (req, res) => {
-    Post.getAllCategories((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving posts."
-            });
-        else res.send(data);
-    });
-};
-exports.getAllCategoryPosts = (req, res) => {
-    Post.getAllCategoryPosts(req.params.category, req.query.page, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                    message: `Not found Post with id ${req.params.id}.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Error retrieving Post with id " + req.params.id
-                });
-            }
-        } else res.send(data);
-    });
-};
-exports.getNumberOfCategoryPosts = (req, res) => {
-    Post.getNumberOfCategoryPosts(req.params.category, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                    message: `Not found Post with id ${req.params.id}.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Error retrieving Post with id " + req.params.id
-                });
-            }
-        } else res.send(data);
-    });
-};
 exports.fetchPostsStats = (req, res) => {
     Post.fetchPostsStats((err, data) => {
         if (err) {

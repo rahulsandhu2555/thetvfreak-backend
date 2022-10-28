@@ -9,7 +9,7 @@ let corsOptions = {
 };
 app.use(cors());
 app.use(express.json())
-
+app.use('/static', express.static('../uploads'))
 const port = 3002;
 app.use(express.json());
 app.use(express.urlencoded({

@@ -54,21 +54,7 @@ Post.findBySlug = (slug, result) => {
         result({kind: "not_found"}, null);
     });
 };
-Post.getAll = (pageNumber, result) => {
-    let query = "SELECT posts.post_title, posts.post_excerpt, posts.post_name, postmeta.meta_value as featured_image FROM posts " + "LEFT JOIN postmeta ON posts.ID = postmeta.post_id " + "where posts.post_type = 'post' and postmeta.meta_key = '_thumbnail_id' " + "ORDER BY post_date desc " + `limit ${pageNumber * dbConfig.listPerPage}, ${dbConfig.listPerPage}`;
-    console.log(query)
 
-    // query += ` WHERE title LIKE '%${title}%'`;
-    sql.query(query, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-        // console.log("post: ", res);
-        result(null, res);
-    });
-};
 Post.fetchPosts = (category, pageNumber, result) => {
     let query = ''
     if (category) {
@@ -106,73 +92,7 @@ Post.getAllPublished = result => {
         result(null, res);
     });
 };
-Post.findTotalNumberOfPosts = result => {
-    sql.query("SELECT count(*) as total FROM posts", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-        console.log("posts: ", res[0]);
-        result(null, res[0]);
-    });
-};
-Post.getAllCategories = result => {
-    sql.query("select distinct(slug) from term_taxonomy inner join terms on terms.term_id = term_taxonomy.term_id where taxonomy='category'", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-        console.log("posts: ", res);
-        result(null, res);
-    });
-};
-Post.getAllCategoryPosts = (category, page, result) => {
-    console.log(category, page)
-    sql.query(`select posts.post_title, posts.post_excerpt, posts.post_name from posts inner join (
-                select object_id from term_relationships a inner join 
-                (select term_taxonomy.term_taxonomy_id, term_taxonomy.term_id, taxonomy, name, slug 
-                    from term_taxonomy inner join terms 
-                    on terms.term_id = term_taxonomy.term_id where taxonomy='category' and slug='${category}') b 
-                on a.term_taxonomy_id = b.term_taxonomy_id) c 
-                on posts.ID = c.object_id` + " ORDER BY posts.post_date desc " + `limit ${page * dbConfig.listPerPage}, ${dbConfig.listPerPage}`, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        if (res.length) {
-            // console.log("found post: ", res);
-            result(null, res);
-            return;
-        }
-        // not found post with the id
-        result({kind: "not_found"}, null);
-    });
-};
-Post.getNumberOfCategoryPosts = (category, result) => {
-    sql.query(`select count(*) as count from posts inner join (
-                select object_id from term_relationships a inner join 
-                (select term_taxonomy.term_taxonomy_id, term_taxonomy.term_id, taxonomy, name, slug 
-                    from term_taxonomy inner join terms 
-                    on terms.term_id = term_taxonomy.term_id where taxonomy='category' and slug='${category}') b 
-                on a.term_taxonomy_id = b.term_taxonomy_id) c 
-                on posts.ID = c.object_id`, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        if (res.length) {
-            console.log("found post: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
-        // not found post with the id
-        result({kind: "not_found"}, null);
-    });
-};
+
 Post.fetchPostsStats = (result) => {
     let count = [];
     sql.query(`select slug, count(slug) as count from posts inner join (

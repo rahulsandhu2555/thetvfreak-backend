@@ -9,7 +9,7 @@ let corsOptions = {
 };
 app.use(cors());
 app.use(express.json())
-app.use('/static', express.static(path.join(__dirname, '../../../static/images'))
+app.use('/static', express.static(path.join(__dirname, '../../../static/images')))
 const port = 3002;
 app.use(express.json());
 app.use(express.urlencoded({
